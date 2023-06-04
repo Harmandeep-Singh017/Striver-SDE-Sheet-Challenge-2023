@@ -1,4 +1,7 @@
-//Keep on storing 1 on those indexes where the row or col results in 0 and then mark all elements on those rows and columns as 0
+/*
+    Using 2 arrays of size n and m
+    Keep on storing 1 on those indexes where the row or col results in 0 and then mark all elements on those rows and columns as 
+*/
 
 import java.io.*;
 import java.util.* ;
