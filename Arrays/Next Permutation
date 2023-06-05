@@ -1,0 +1,52 @@
+/*
+   1. Find index "ind" from last where, arr[i] < arr[i + 1]
+   2. Don't touch the array from index 0 to (ind - 1)
+   3. Find index at right of "ind" where, arr[index] < arr[ind]
+   4. Swap arr[ind] and arr[index]
+   5. At last, reverse the order of array from (ind + 1, size - 1)
+*/
+
+import java.util.* ;
+import java.io.*; 
+
+public class Solution 
+{
+	public static void swap(ArrayList<Integer> arr,int i,int j){
+        int temp=arr.get(i);
+        arr.set(i,arr.get(j));
+        arr.set(j,temp);
+    }
+	public static void reverse(ArrayList<Integer> arr,int i,int j){
+        while(i<j){
+            swap(arr,i,j);
+            i++;
+            j--;
+        }
+	}
+	public static ArrayList<Integer> nextPermutation(ArrayList<Integer> permutation)  {
+		ArrayList<Integer> next = new ArrayList<>();
+		int size = permutation.size();
+		if (size == 1)
+			return permutation;
+		int ind = size - 2;
+		int prev = size - 1;
+		while (ind >= 0 && permutation.get(ind) > permutation.get(prev)) {
+			prev = ind;
+			ind--;
+		}
+		prev = ind;
+		if (ind == -1) {
+			Collections.sort(permutation);
+			return permutation;
+		}
+		int index = size - 1;
+		while (index >= prev && permutation.get(index) < permutation.get(prev)) {
+			index--;
+		}
+		Collections.swap(permutation, index, prev);
+		reverse(permutation, prev + 1, size - 1);
+		for (int i: permutation)
+			next.add(i);	
+		return next;
+	}
+}
