@@ -1,0 +1,22 @@
+/*
+    Using Simple Kadane's Algorithm
+*/
+
+import java.util.* ;
+import java.io.*; 
+
+public class Solution {
+	public static long maxSubarraySum(int[] arr, int n) {
+		long maxi = 0;
+		long sum = 0;
+
+		for (int i : arr) {
+			sum += (long)i;
+			maxi = Math.max(sum, maxi);
+			if (sum < 0) {
+				sum = 0L;
+			}
+		}
+		return maxi;
+	}
+}
