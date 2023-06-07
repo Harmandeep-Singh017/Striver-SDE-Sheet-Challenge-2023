@@ -1,0 +1,28 @@
+/*
+    In each cell we have 2 choices:  Either Go down or Right
+    Simply use Memoization in recursive solution.    
+*/
+
+
+
+import java.util.* ;
+import java.io.*; 
+
+public class Solution {
+	static boolean flag = false;
+	public static int fun(int i, int j, int n, int m, int[][] dp) {
+		if (i > n || j > m)
+			return 0;
+		if (i == n && j == m)
+			return 1;
+		if (dp[i][j] != 0)
+			return dp[i][j];
+		int right = fun(i, j + 1, n, m, dp);
+		int down = fun(i + 1, j, n, m, dp);
+		return dp[i][j] = right + down;
+	}
+	public static int uniquePaths(int m, int n) {
+		int[][] dp = new int[m][n];
+		return fun(0, 0, m - 1, n - 1, dp);
+	}
+}
