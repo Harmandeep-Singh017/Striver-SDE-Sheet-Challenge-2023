@@ -1,0 +1,24 @@
+/*
+    Binary Search
+*/
+
+
+import java.util.ArrayList;
+public class Solution {
+    static boolean searchMatrix(ArrayList<ArrayList<Integer>> mat, int target) {
+        // Write your code here.
+        int x = mat.size();
+        int y = mat.get(0).size();
+        int a = 0, b = x*y-1;
+        while (a <= b){
+            int mid = (a+b)/2;
+            if(target == mat.get(mid / y).get(mid % y)) return true;
+            else{
+                if(target > mat.get(mid / y).get(mid % y))
+                    a = mid+1;
+                else b = mid-1;
+            }
+        }
+        return false;
+    }
+}
