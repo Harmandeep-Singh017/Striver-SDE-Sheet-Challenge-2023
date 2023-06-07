@@ -1,0 +1,36 @@
+/*
+    1. Calculate total possible sum of N natural numbers
+    2. Calculate sum of current array
+    3. Find out repeated number using HashSet
+    4. Subtract repeated number from sum to find out missing number
+    5. Missing number = total sum of N natural number - sum of current array
+    6. return ans[missing number, repeated number].
+*/
+
+
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+
+public class Solution {
+    public static int findRepeated(ArrayList<Integer> arr) {
+        Set<Integer> set = new HashSet<>();
+        for (int i : arr)
+            if (!set.add(i))
+                return i;
+        return 0;
+    }
+    public static int[] missingAndRepeating(ArrayList<Integer> arr, int n) {
+        int totalSum = n * (n + 1) / 2;
+        int sum = 0;
+        for (int i: arr)
+            sum += i;
+        int repeated = findRepeated(arr);
+        int[] ans = new int[2];
+        sum -= repeated;
+        int missing = totalSum - sum;
+        ans[0] = missing;
+        ans[1] = repeated;
+        return ans;
+    }
+}
