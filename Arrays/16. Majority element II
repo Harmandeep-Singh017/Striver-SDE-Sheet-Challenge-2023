@@ -1,0 +1,28 @@
+/*
+    Using HashMap and storing frequency of each element
+    If encountered any element with frequency > (n / 3), then store that into answer
+*/
+
+
+import java.io.*;
+import java.util.* ;
+
+public class Solution 
+{
+    public static ArrayList<Integer> majorityElementII(ArrayList<Integer> arr) 
+    {
+        // Write your code here.
+        ArrayList<Integer> ans = new ArrayList<>();
+
+        int n = arr.size();
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i: arr) 
+            map.put(i, map.getOrDefault(i, 0) + 1);
+        for (Map.Entry<Integer, Integer> mp: map.entrySet()) {
+            int val = mp.getValue();
+            if (val > n / 3) 
+                ans.add(mp.getKey());
+        }
+        return ans;
+    }
+}
