@@ -1,0 +1,22 @@
+/*
+    Simple use of HashSet.
+    Keep on storing elements in set
+    If current element already exists in array then return that element
+    if all are unique then return -1.
+*/
+
+
+import java.io.*;
+import java.util.* ;
+
+import java.util.ArrayList;
+
+public class Solution{
+    public static int findDuplicate(ArrayList<Integer> arr, int n){
+        Set<Integer> set = new HashSet<>();
+        for (int i: arr)
+            if (!set.add(i))
+                return i;
+        return -1;
+    }
+}
