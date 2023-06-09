@@ -1,0 +1,34 @@
+/*
+    Use 2 pointers and HashMap<Character, Integer>
+    Keep on storing characters in map with their frequency of occurence.
+    Whenever encountered any character twice then shrink the indices and keep on removing characters from HashMap
+    Keep on storing maximum length of current substring 
+*/
+
+
+import java.util.* ;
+import java.io.*; 
+
+public class Solution 
+{
+	public static int uniqueSubstrings(String input) {
+		int i = 0, j = 0, n = input.length();
+		int length = 1;
+		HashMap<Character, Integer> map = new HashMap<>();
+		while (j < n) {
+			char c = input.charAt(j);
+			map.put(c, map.getOrDefault(c, 0) + 1);
+			while (i < j && map.get(c) >= 2) {
+				char temp = input.charAt(i);
+				if (map.get(temp) == 1)
+					map.remove(temp);
+				else
+					map.put(temp, map.get(temp) - 1);
+				i++;
+			} 
+			length = Math.max(length, j - i + 1);
+			j++;
+		}
+		return length;
+	}
+}
