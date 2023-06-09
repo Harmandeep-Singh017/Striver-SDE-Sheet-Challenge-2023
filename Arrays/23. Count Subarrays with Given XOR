@@ -1,0 +1,25 @@
+/*
+    Keep on storing prefix XOR in hashmap with frequency of occurence of each XOR.
+*/
+
+
+import java.io.*;
+import java.util.* ;
+
+public class Solution {
+	public static int subarraysXor(ArrayList<Integer> arr, int x) {
+		Map<Integer, Integer> map = new HashMap<>();
+        int count = 0, xor = 0;
+
+		for (int i: arr) {
+			xor = xor ^ i;
+			if (map.containsKey(xor ^ x))
+				count += map.get(xor ^ x);
+			if (xor == x)
+				count++;
+			
+			map.put(xor, map.getOrDefault(xor, 0) + 1);
+		}
+		return count;
+	}
+}
