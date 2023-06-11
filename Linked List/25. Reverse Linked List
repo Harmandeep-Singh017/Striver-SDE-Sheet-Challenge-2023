@@ -1,0 +1,14 @@
+
+public class Solution 
+{
+    public static LinkedListNode<Integer> reverseLinkedList(LinkedListNode<Integer> head) {
+        LinkedListNode<Integer> reverse = null;
+        while (head != null) {
+          LinkedListNode<Integer> next = head.next;
+          head.next = reverse;
+          reverse = head;
+          head = next;
+        }
+        return reverse;
+    }
+}
