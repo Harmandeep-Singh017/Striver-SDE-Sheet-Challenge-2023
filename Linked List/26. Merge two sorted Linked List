@@ -1,0 +1,54 @@
+// 1. Recursive Approach for merging 2 sorted Linked Lists.
+
+public class Solution {
+	public static LinkedListNode<Integer> sortTwoLists(LinkedListNode<Integer> first, LinkedListNode<Integer> second) {
+		LinkedListNode<Integer> merged = null;
+        if (first == null)
+            return second;
+        if (second == null)
+            return first;
+
+        if (first.data < second.data) {
+            first.next = sortTwoLists(first.next, second);
+            return first;
+        }
+        else {
+            second.next = sortTwoLists(first, second.next);
+            return second;
+        }
+	}
+}
+
+
+// 2. Iterative Approach
+
+
+public class Solution {
+	public static LinkedListNode<Integer> sortTwoLists(LinkedListNode<Integer> first, LinkedListNode<Integer> second) {
+		LinkedListNode<Integer> merged = new LinkedListNode(0);
+        if (first == null)
+            return second;
+        else if (second == null)
+            return first;
+
+        LinkedListNode<Integer> temp = merged;
+
+        while (first != null && second != null) {
+            if (first.data <= second.data) {
+                temp.next = first;
+                first = first.next;
+            } else {
+                temp.next = second;
+                second = second.next;
+            }
+            temp = temp.next;
+        }
+        if (first != null) {
+            temp.next = first;
+        } 
+        if (second != null)
+            temp.next = second;
+
+        return merged.next;
+	}
+}
