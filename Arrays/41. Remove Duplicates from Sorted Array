@@ -1,0 +1,20 @@
+// Both ways: With and Without Space
+
+
+import java.util.*;
+public class Solution {
+	public static int removeDuplicates(ArrayList<Integer> arr,int n) {
+		// Set<Integer> set = new HashSet<>();
+		// for (int i: arr)
+		// 	set.add(i);
+		// return set.size();
+		int count = 1, prev = arr.get(0);
+		for (int i: arr) {
+			if (i != prev) {
+				prev = i;
+				count++;
+			}
+		}
+		return count;
+	}
+}
