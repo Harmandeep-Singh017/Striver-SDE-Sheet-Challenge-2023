@@ -1,0 +1,22 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static void fun(int ind, int[] arr, ArrayList<Integer> sub, ArrayList<ArrayList<Integer>> ans) {
+        
+        ans.add(new ArrayList<>(sub));
+        for (int i = ind; i < arr.length; i++) {
+            if (i > ind && arr[i] == arr[i - 1])
+                continue;
+            sub.add(arr[i]);
+            fun(i + 1, arr, sub, ans);
+            sub.remove(sub.size() - 1);
+        }
+    }
+    public static ArrayList<ArrayList<Integer>> uniqueSubsets(int n, int arr[]) {
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+        ArrayList<Integer> sub = new ArrayList<>();
+        Arrays.sort(arr);
+        fun(0, arr, sub, res);
+        return res;
+    }
+}
