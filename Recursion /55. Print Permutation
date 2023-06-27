@@ -1,0 +1,30 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static void swap(char[] ch, int l, int r) {
+        char temp = ch[l];
+        ch[l] = ch[r];
+        ch[r] = temp;
+    }
+    public static void permute(char[] ch, int l, int r, List<String> res) {
+        if (l == r) {
+            String str = "";
+            for (char c: ch)
+                str += c;
+            res.add(str);
+        }
+        else{
+            for (int i = l; i <= r; i++) {
+                swap(ch, l, i);
+                permute(ch, l + 1, r, res);
+                swap(ch, l, i);
+            }
+        }
+    }
+    public static List<String> findPermutations(String s) {
+        char[] ch = s.toCharArray();
+        List<String> sub = new ArrayList<>();
+        permute(ch, 0, s.length() - 1, sub);
+        return sub;
+    }
+}
