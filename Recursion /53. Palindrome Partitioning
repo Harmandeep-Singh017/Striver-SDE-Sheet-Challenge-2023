@@ -1,0 +1,34 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static boolean isPalindrome(String s, int left, int right) {
+        while (left < right) {
+            if (s.charAt(left) != s.charAt(right))
+                return false;
+            left++;
+            right--;
+        }
+        return true;
+    }
+    public static void fun(int ind, String s, List<String> sub, List<List<String>> res) {
+        if (ind == s.length()) {
+            res.add(new ArrayList<>(sub));
+            return;
+        }
+
+        for (int i = ind; i < s.length(); i++) {
+            if (isPalindrome(s, ind, i)) {
+                sub.add(s.substring(ind, i + 1));
+                fun(i + 1, s, sub, res);
+                sub.remove(sub.size() - 1);
+            }
+        }
+    }
+    public static List<List<String>> partition(String s) {
+        // Write your code here.
+        List<List<String>> ans = new ArrayList<>();
+        List<String> sub = new ArrayList<>();
+        fun(0, s, sub, ans);
+        return ans;
+    }
+}
