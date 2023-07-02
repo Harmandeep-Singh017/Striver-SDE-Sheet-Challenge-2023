@@ -1,0 +1,52 @@
+import java.util.*;
+public class Solution {
+    public static boolean isPossible(int r, int c, int[][] brd) {
+        int row = r, col = c;
+        while (r >= 0 && c >= 0) {
+            if (brd[r][c] == 1)
+                return false;
+            r--;    c--; 
+        }
+        r = row;
+        c = col;
+        while (c >= 0) {
+            if (brd[r][c] == 1) 
+                return false;
+            c--;
+        }
+        r = row;
+        c = col;
+        while (c >= 0 && r < brd.length) {
+            if (brd[r][c] == 1)
+                return false;
+            c--;
+            r++;
+        }
+        return true;
+    }
+    public static void dfs(int ind, int[][] board, ArrayList<ArrayList<Integer>> res) {
+        if (ind == board.length) {
+            ArrayList<Integer> sub = new ArrayList<>();
+            for (int[] ar: board) {
+                for (int i : ar)
+                    sub.add(i);
+            }
+            res.add(sub);
+            return;
+        }
+
+        for (int i = 0; i < board.length; i++) {
+            if (isPossible(i, ind, board)) {
+                board[i][ind] = 1;
+                dfs(ind + 1, board, res);
+                board[i][ind] = 0;
+            }
+        }
+    }
+    public static ArrayList<ArrayList<Integer>> solveNQueens(int n) {
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+        int[][] board = new int[n][n];
+        dfs(0, board, res);
+        return res;
+    }
+}
