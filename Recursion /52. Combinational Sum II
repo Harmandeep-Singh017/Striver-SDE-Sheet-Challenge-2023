@@ -1,0 +1,23 @@
+import java.util.*;
+
+public class Solution 
+{
+    public static void fun(int ind, int k, ArrayList<Integer> arr, ArrayList<Integer> sub, ArrayList<ArrayList<Integer>> res) {
+        if (k == 0)
+            res.add(new ArrayList<>(sub));
+        for (int i = ind; i < arr.size(); i++) {
+            if (i != ind && arr.get(i) == arr.get(i - 1))
+                continue;
+            sub.add(arr.get(i));
+            fun(i + 1, k - arr.get(i), arr, sub, res);
+            sub.remove(sub.size() - 1);
+        }
+    }
+    public static ArrayList<ArrayList<Integer>> combinationSum2(ArrayList<Integer> arr, int n, int target) {
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+        Collections.sort(arr);
+        ArrayList<Integer> sub = new ArrayList<>();
+        fun(0, target, arr, sub, res);
+        return res;
+    }
+}
