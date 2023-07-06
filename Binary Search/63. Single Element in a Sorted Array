@@ -1,0 +1,43 @@
+// Using XOR
+import java.util.ArrayList;
+public class Solution
+{
+    public static int singleNonDuplicate(ArrayList<Integer> arr)
+    {
+        int xor = 0;
+        for (int i: arr)
+            xor ^= i;
+        return xor;
+    }
+}
+
+// Using Binary Search
+
+import java.util.ArrayList;
+public class Solution
+{
+    public static int singleNonDuplicate(ArrayList<Integer> arr)
+    {
+        int low = 0, high = arr.size() - 1;
+
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+            if (mid % 2 == 0) {
+                int left = arr.get(mid);
+                int right = arr.get(mid + 1);
+                if (left == right)
+                    low = mid + 1;
+                else
+                    high = mid;
+            } else {
+                int left = arr.get(mid - 1);
+                int right = arr.get(mid);
+                if (left == right)
+                    low = mid + 1;
+                else
+                    high = mid;
+            }
+        }
+        return arr.get(low);
+    }
+}
