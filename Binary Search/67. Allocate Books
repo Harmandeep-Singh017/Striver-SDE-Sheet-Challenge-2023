@@ -1,0 +1,37 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static boolean isPossible(int[] arr, long mid, int max) {
+        long count = 1, sum = 0;
+        for (int i: arr) {
+            if (sum + (long)i <= mid)
+                sum += (long)i;
+            else {
+                count++;
+                if (count > max || i > mid)
+                    return false;
+                sum = i;
+                
+            }
+        }
+    
+        return true;
+    }
+    public static long ayushGivesNinjatest(int n, int m, int[] time) {
+        long res = -1L;
+        long low = 0, high = 0;
+        for (int i: time) {
+            low = Math.min((int)low, i);
+            high += (long)i;
+        }
+        while (low <= high) {
+            long mid = (low + (high - low) / 2);
+            if (isPossible(time, mid, n)) {
+                res = mid;
+                high = mid - 1;
+            } else
+                low = mid + 1;
+        }
+        return res;
+    }
+}
