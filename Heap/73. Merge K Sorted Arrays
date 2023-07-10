@@ -1,0 +1,17 @@
+import java.util.* ;
+import java.io.*; 
+
+public class Solution 
+{
+	public static ArrayList<Integer> mergeKSortedArrays(ArrayList<ArrayList<Integer>> kArrays, int k) {
+		ArrayList<Integer> ans = new ArrayList<>();
+		PriorityQueue<Integer> pq = new PriorityQueue<>();
+		for (ArrayList<Integer> arr: kArrays)
+			for (int i: arr)
+				pq.offer(i);
+		
+		while (!pq.isEmpty())
+			ans.add(pq.poll());
+		return ans;
+	}
+}
