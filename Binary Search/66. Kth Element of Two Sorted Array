@@ -1,0 +1,28 @@
+public class Solution {
+    public static int ninjaAndLadoos(int row1[], int row2[], int m, int n, int k) {
+        int[] merged = new int[n + m];
+        int i = 0, j = 0, ind = 0;
+        while (i < m && j < n) {
+            if (row1[i] <= row2[j])
+                merged[ind++] = row1[i++];
+            else
+                merged[ind++] = row2[j++];
+        }
+        while (i < m) 
+            merged[ind++] = row1[i++];
+        while (j < n)
+            merged[ind++] = row2[j++];
+
+        int low = 0, high = n + m;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (mid == k)
+                return merged[mid - 1];
+            if (mid < k)
+                low = mid + 1;
+            else
+                high = mid - 1;
+        }
+        return -1;
+    }
+}
