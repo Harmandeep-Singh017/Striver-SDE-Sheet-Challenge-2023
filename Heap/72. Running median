@@ -3,7 +3,8 @@ import java.util.*;
 public class Solution {
 
 	public static void findMedian(int arr[])  {
-		if(arr.length==0)return;
+	if(arr.length==0)
+	    return;
         PriorityQueue<Integer> min = new PriorityQueue<>();
         PriorityQueue<Integer> max = new PriorityQueue<>(Collections.reverseOrder());
         System.out.print(arr[0]+" ");
@@ -26,7 +27,7 @@ public class Solution {
             }
             else{
                 System.out.print(max.peek()+" ");
-			      }
-		    }
+	    }
+	}
     }
 }
