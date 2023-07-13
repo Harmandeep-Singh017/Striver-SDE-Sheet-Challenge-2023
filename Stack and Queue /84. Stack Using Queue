@@ -1,0 +1,52 @@
+import java.util.* ;
+import java.io.*; 
+public class Stack {
+
+    // Define the data members.
+    Queue<Integer> que1;
+    Queue<Integer> que2;
+
+    public Stack() {
+        // Implement the Constructor.
+        que1 = new ArrayDeque<>();
+        que2 = new ArrayDeque<>();
+    }
+
+
+
+    /*----------------- Public Functions of Stack -----------------*/
+
+
+    public int getSize() { 
+        // Implement the getSize() function.
+        return que1.size();
+    }
+
+    public boolean isEmpty() {
+        // Implement the isEmpty() function.
+        return que1.size() == 0;
+    }
+
+    public void push(int element) {
+        // Implement the push(element) function.
+        while (!que1.isEmpty())
+            que2.offer(que1.poll());
+        que1.offer(element);
+        while (!que2.isEmpty())
+            que1.offer(que2.poll());
+    }
+
+    public int pop() {
+        // Implement the pop() function.
+        if (isEmpty())
+            return -1;
+        return que1.poll();
+    }
+
+    public int top() {
+        // Implement the top() function.
+        if (isEmpty())
+            return -1;
+        return que1.peek();
+    }
+}
