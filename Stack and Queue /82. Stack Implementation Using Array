@@ -1,0 +1,42 @@
+import java.util.* ;
+import java.io.*; 
+
+public class Stack {    
+    int[] stack;
+    int top;
+    int cap;
+
+    Stack(int capacity){
+        stack = new int[capacity];
+        top = 0;
+        cap = capacity;
+    }
+
+    void push(int num) {
+        if (top == cap)
+            return;
+        top = top + 1;
+        stack[top] = num;
+    }
+    int pop() {
+        if (isEmpty() == 1)
+            return -1;
+        top = top - 1;
+        return stack[top];
+    }
+    int top() {
+        if (isEmpty() == 1)
+            return -1;
+        return stack[top - 1];
+    }
+    int isEmpty() {
+        if (top == 0)
+            return 1;
+        return 0;
+    }
+    int isFull() {
+        if (top == cap)
+            return 1;
+        return 0;
+    }
+}
