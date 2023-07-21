@@ -1,0 +1,27 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution 
+{
+    public static String writeAsYouSpeak(int n) {
+        StringBuilder str = new StringBuilder("1");
+
+        while (n--> 1) {
+            int len = str.length();
+            int i = 0;
+            StringBuilder prev = new StringBuilder();
+            while (i < len) {
+                int count = 0;
+                char c = str.charAt(i);
+                while (i < len && str.charAt(i) == c) {
+                    count++;
+                    i++;
+                }
+                String cnt = Integer.toString(count);
+                prev.append(cnt);
+                prev.append(c);
+            }
+            str = prev;
+        }
+        return str.toString();
+    }
+}
