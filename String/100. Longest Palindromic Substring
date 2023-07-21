@@ -1,0 +1,27 @@
+public class Solution {	
+	public static String find(String s, int left, int right) {
+		int n = s.length();
+		while (left >= 0 && right < n) {
+			if (s.charAt(left) != s.charAt(right))
+				break;
+			left--;
+			right++;
+		}
+		return s.substring(left + 1, right - left + 1);
+	}
+	public static String longestPalinSubstring(String str) {
+		String maxi = "";
+		int n = str.length();
+		for (int i = 0; i < n; i++) {
+			String even = find(str, i, i + 1);
+			if (even.length() > maxi.length())
+				maxi = even;
+		}
+		for (int i = 0; i < n; i++) {
+			String odd = find(str, i, i);
+			if (odd.length() > maxi.length())
+				maxi = odd;
+		}
+		return maxi;
+	}
+}
