@@ -1,0 +1,77 @@
+class TrieNode{
+   TrieNode[] child;
+   int cntprefix;
+   int cntwordend;
+   public TrieNode(){
+       this.child = new TrieNode[26];
+       cntprefix = 0;
+       cntwordend = 0;
+   }
+}public class Trie {
+   TrieNode root;
+   public Trie() {
+       // Write your code here.
+       root = new TrieNode();
+   }
+
+   public void insert(String word) {
+       word = word.toLowerCase();
+       TrieNode cur = root;
+       for(int i=0; i<word.length(); i++){
+           char c = word.charAt(i);
+           int index = c -'a';
+           if(cur.child[index] == null){
+               TrieNode node = new TrieNode();
+               cur.child[index] = node;
+               cur.cntprefix +=1;
+               cur = node;
+           }else{
+               cur.cntprefix += 1;
+               cur = cur.child[index];
+           }
+       }
+       cur.cntwordend += 1;
+       cur.cntprefix +=1;
+   }
+
+   public int countWordsEqualTo(String word) {
+       // Write your code here.
+       TrieNode cur = root;
+       for(char c : word.toCharArray()){
+           int ind = c-'a';
+           if(cur.child[ind] == null){
+               return 0;
+           }
+           cur = cur.child[ind];
+       }
+           return cur.cntwordend;
+   }
+
+   public int countWordsStartingWith(String word) {
+       // Write your code here.
+       TrieNode cur = root;
+       for(char c : word.toCharArray()){
+           int index = c - 'a';
+           if(cur.child[index] == null){
+               return 0;
+           }
+           cur = cur.child[index];
+       }
+       return cur.cntprefix;
+   }
+
+   public void erase(String word) {
+       // Write your code here.
+//         if(countWordsEqualTo <= 0) return;
+       word = word.toLowerCase();
+       TrieNode cur = root;
+       for(int i=0; i<word.length(); i++){
+           char c = word.charAt(i);
+           int index = c -'a';
+           cur.cntprefix -=1;
+           cur = cur.child[index];
+       }
+       cur.cntprefix -= 1;
+       cur.cntwordend -=1;
+   }
+}
