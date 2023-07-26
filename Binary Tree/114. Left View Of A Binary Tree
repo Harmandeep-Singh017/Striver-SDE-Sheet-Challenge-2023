@@ -1,0 +1,22 @@
+import java.util.*;
+
+public class Solution 
+{
+    public static ArrayList<Integer> getLeftView(TreeNode<Integer> root) {
+        ArrayList<Integer> left = new ArrayList<>();
+        if (root == null)
+            return left;
+        Queue<TreeNode<Integer>> que = new ArrayDeque<>();
+        que.offer(root);
+        while (!que.isEmpty()) {
+            int n = que.size();
+            left.add(que.peek().data);
+            while (n-->0) {
+                TreeNode<Integer> node = que.poll();
+                if (node.left != null)      que.offer(node.left);
+                if (node.right != null)     que.offer(node.right);
+            }
+        }
+        return left;
+    }
+}
