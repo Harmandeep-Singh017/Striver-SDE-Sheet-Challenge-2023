@@ -1,0 +1,36 @@
+import java.util.* ;
+import java.io.*; 
+/*
+    
+    Following is the Binary Tree node structure:
+
+    public class TreeNode {
+        int data;
+        TreeNode left;
+        TreeNode right;
+        TreeNode() {}
+        TreeNode(int val) { this.data = val; }
+        TreeNode(int val, TreeNode left, TreeNode right) {
+           this.data = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+
+*/
+
+public class Solution {
+    public static void fun(TreeNode node, List<Integer> postorder) {
+        if (node == null)
+            return;
+        fun(node.left, postorder);
+        fun(node.right, postorder);
+        postorder.add(node.data);
+    }
+    public static List < Integer > getPostOrderTraversal(TreeNode root) {
+    	// Write your code here.
+        List<Integer> postorder = new ArrayList<>();
+        fun(root, postorder);
+        return postorder;
+    }
+}
