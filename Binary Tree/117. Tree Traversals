@@ -1,0 +1,24 @@
+import java.util.*;
+
+public class Solution {
+	public static void fun(BinaryTreeNode<Integer> root, List<Integer> pre, List<Integer> in, List<Integer> post) {
+  		if (root == null)
+  			return;
+  		pre.add(root.data);
+  		fun(root.left, pre, in, post);
+  		in.add(root.data);
+  		fun(root.right, pre, in, post);
+  		post.add(root.data);
+	}
+    public static List<List<Integer>> getTreeTraversal(BinaryTreeNode<Integer> root) {
+        List<Integer> inorder = new ArrayList<>();
+    		List<Integer> preorder = new ArrayList<>();
+    		List<Integer> postorder = new ArrayList<>();
+    		fun(root, preorder, inorder, postorder);
+    		List<List<Integer>> res = new ArrayList<>();
+    		res.add(inorder);
+    		res.add(preorder);
+    		res.add(postorder);
+    		return res;
+    }
+}
