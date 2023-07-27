@@ -1,0 +1,72 @@
+import java.util.* ;
+import java.io.*; 
+/************************************************************
+
+    Following is the Binary Tree node structure:
+    
+   class TreeNode {
+	    int data;
+	    TreeNode left;
+	    TreeNode right;
+
+	    TreeNode(int data) {
+		    this.data = data;
+		    this.left = null;
+		    this.right = null;
+	    }
+
+    }
+
+************************************************************/
+
+import java.util.ArrayList;
+ 
+public class Solution {
+    static boolean isLeaf(TreeNode root){
+        return root.left == null && root.right == null;
+    }
+ 
+    static void addLeftNodes(TreeNode root, ArrayList<Integer> res){
+        TreeNode node = root.left;
+        while(node != null){
+            if(!isLeaf(node)) res.add(node.data);
+            if(node.left != null) node = node.left;
+            else node = node.right;
+        }
+    }
+ 
+    static void addLeafNodes(TreeNode root, ArrayList<Integer> res){
+        if(isLeaf(root)){
+            res.add(root.data);
+            return;
+        }
+        if(root.left != null) addLeafNodes(root.left, res);
+        if(root.right != null) addLeafNodes(root.right, res);
+    }
+ 
+    static void addRightNodes(TreeNode root, ArrayList<Integer> res){
+        TreeNode node = root.right;
+        while(node != null){
+            if(!isLeaf(node)) res.add(node.data);
+            if(node.right != null) node = node.right;
+            else node = node.left;
+        }
+    }
+ 
+    public static ArrayList<Integer> traverseBoundary(TreeNode root){
+        ArrayList<Integer> res = new ArrayList<>();
+        ArrayList<Integer> right = new ArrayList<>();
+        if(!isLeaf(root)) res.add(root.data);
+ 
+        addLeftNodes(root, res);
+        addLeafNodes(root, res);
+        addRightNodes(root, right);
+        Collections.reverse(right);
+ 
+        for(int e: right){
+            res.add(e);
+        }
+        return res;
+
+    }
+}
