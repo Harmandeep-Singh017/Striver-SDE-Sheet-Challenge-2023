@@ -1,0 +1,19 @@
+import java.util.*;
+
+public class Solution {
+	public static int maxDiameter(TreeNode<Integer> node, int[] dia) {
+		if (node == null)
+			return 0;
+		int left = maxDiameter(node.left, dia);
+		int right = maxDiameter(node.right, dia);
+		dia[0] = Math.max(left + right, dia[0]);
+		return 1 + Math.max(left, right);
+	}
+	public static int diameterOfBinaryTree(TreeNode<Integer> root) {
+		if (root == null)
+			return 0;
+		int[] diameter = new int[1];
+		maxDiameter(root, diameter);
+		return diameter[0];
+	}
+}
