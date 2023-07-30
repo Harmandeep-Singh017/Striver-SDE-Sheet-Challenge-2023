@@ -1,0 +1,25 @@
+import java.util.*;
+public class Solution {
+	public static long fun(int ind, int total, int[] arr, long[][] dp) {
+		if (ind == arr.length - 1) {
+			if (total % arr[ind] == 0)
+				return 1;
+			else
+				return 0;
+		}
+		if (dp[ind][total] != -1)
+			return dp[ind][total];
+		long notpick = fun(ind + 1, total, arr, dp);
+		long pick = 0;
+		if (arr[ind] <= total)
+			pick = fun(ind, total - arr[ind], arr, dp);
+		return dp[ind][total] = pick + notpick;
+	}
+	public static long countWaysToMakeChange(int denominations[], int value){
+        //write your code here			
+		long[][] dp = new long[denominations.length][value + 1];
+		for (long[] a: dp)
+			Arrays.fill(a, -1);
+		return fun(0, value, denominations, dp);
+	}
+}
