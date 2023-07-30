@@ -1,0 +1,24 @@
+public class Solution 
+{
+    static int index;
+    static Map<Integer, Integer> map;
+    public static TreeNode<Integer> buildBinaryTree(ArrayList<Integer>  in, ArrayList<Integer>  pre) 
+    {
+        //    Write your code here.
+        map = new HashMap<>();
+        index = 0;
+        for(int i=0; i<in.size(); i++) map.put(in.get(i), i);
+        return constract(pre, 0, in.size()-1);
+    }
+    public static TreeNode<Integer> constract(ArrayList<Integer> pre, int start, int end) {
+        if(start>end) return null;
+        
+        TreeNode<Integer> node = new TreeNode(pre.get(index++));
+        int in_index = map.get(node.data);
+        
+        node.left = constract(pre, start, in_index-1);
+        node.right = constract(pre, in_index+1, end);
+        
+        return node;
+    }
+}
