@@ -1,0 +1,24 @@
+import java.util.* ;
+
+public class Solution {
+    public static int fun(int ind, int prev, ArrayList<Integer> rack, int[][] dp) {
+        if (ind == rack.size())
+            return 0;
+        
+        if (dp[ind][prev + 1] != -1)
+            return dp[ind][prev + 1];
+
+        int notpick = fun(ind + 1, prev, rack, dp);
+        int pick = 0;
+        if (prev == -1 || rack.get(ind) > rack.get(prev)) 
+            pick = rack.get(ind) + fun(ind + 1, ind, rack, dp);
+        
+        return dp[ind][prev + 1] = Math.max(pick, notpick);
+    }
+    public static int maxIncreasingDumbbellsSum(ArrayList<Integer> rack, int n) {
+        int[][] dp = new int[n][n + 1];
+        for (int[] a: dp)
+            Arrays.fill(a, -1);
+        return fun(0, -1, rack, dp);
+    }
+}
