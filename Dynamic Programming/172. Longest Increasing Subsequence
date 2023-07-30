@@ -1,0 +1,22 @@
+import java.util.*;
+public class Solution {
+	public static int fun(int ind, int prev, int[] arr, int[][] memo) {
+		if (ind == arr.length)
+			return 0;
+		if (memo[ind][prev + 1] != -1)
+			return memo[ind][prev + 1];
+		int notTake = fun(ind + 1, prev, arr, memo);
+		int take = 0;
+		if (prev == -1 || arr[ind] > arr[prev])
+			take = 1 + fun(ind + 1, ind, arr, memo);
+		return memo[ind][prev + 1] = Math.max(take, notTake);
+	}
+
+	public static int longestIncreasingSubsequence(int arr[]) {
+		int n = arr.length;
+		int[][] dp = new int[n][n + 1];
+		for (int[] a: dp)
+			Arrays.fill(a, -1);
+		return fun(0, -1, arr, dp);
+	}
+}
