@@ -1,0 +1,24 @@
+import java.util.*;
+public class Solution {
+
+    public static int editDistance(String str1, String str2) {
+        //Your code goes here
+        int ind1=str1.length();
+        int ind2=str2.length();
+ 
+        int [][]dp=new int [ind1][ind2];
+        for(int []row:dp) Arrays.fill(row,-1);
+ 
+        return memo(ind1-1,ind2-1,str1,str2,dp);
+    }
+    static int memo(int i,int j,String s,String t,int[][]dp) {
+        if(i<0) return j+1;
+        if(j<0) return i+1;
+        if(dp[i][j]!=-1) return dp[i][j];
+        if(s.charAt(i)==t.charAt(j)) return  dp[i][j]= memo(i-1,j-1,s,t,dp);
+        return dp[i][j]= 1+ Math.min(memo(i,j-1,s,t,dp),Math.min(
+                        memo(i-1, j, s, t,dp),
+                        memo(i-1, j-1, s, t,dp)
+                        ));
+    }
+}
